@@ -108,12 +108,12 @@ void PAJ7620::read_gesture_data_() {
     case DOWN:
     case LEFT:
     case RIGHT:
-      if (this->prev_gesture == current_gesture) {
-        this->prev_gesture = NONE;
+      if (this->prev_gesture_ == current_gesture) {
+        this->prev_gesture_ = NONE;
         this->report_gesture_(current_gesture);
       } else {
         PAJ7620_DELAY(this->gesture_entery_time_);
-        this->prev_gesture = current_gesture;
+        this->prev_gesture_ = current_gesture;
       }
       break;
 

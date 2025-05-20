@@ -10,9 +10,10 @@
 namespace esphome {
 namespace paj7620 {
 
+#define PAJ7620_REG_BANK_SEL 0xEF
+
 static const uint8_t paj7620_init_register_array[][2] = {
-    // BANK 0
-    {0xEF, 0x00},
+    {PAJ7620_REG_BANK_SEL, 0x00},  // GO TO BANK 0
     {0x37, 0x07},
     {0x38, 0x17},
     {0x39, 0x06},
@@ -42,8 +43,7 @@ static const uint8_t paj7620_init_register_array[][2] = {
     {0xCE, 0x13},
     {0xCF, 0x64},
     {0xD0, 0x21},
-    // BANK 1
-    {0xEF, 0x01},
+    {PAJ7620_REG_BANK_SEL, 0x01},  // GO TO BANK 1
     {0x02, 0x0F},
     {0x03, 0x10},
     {0x04, 0x02},
@@ -62,11 +62,10 @@ static const uint8_t paj7620_init_register_array[][2] = {
     {0x72, 0x01},
     {0x73, 0x35},
     {0x77, 0x01},
-    {0xEF, 0x00},
+    {PAJ7620_REG_BANK_SEL, 0x00}  // GO TO BANK 0
 };
 #define PAJ7620_INIT_REG_ARRAY_SIZE (sizeof(paj7620_init_register_array) / sizeof(paj7620_init_register_array[0]))
 
-#define PAJ7620_REG_BANK_SEL 0xEF
 #define PAJ7620_REG_RESULT_L 0x43
 #define PAJ7620_REG_RESULT_H 0x44
 
@@ -125,7 +124,7 @@ class PAJ7620 : public Component, public i2c::I2CDevice {
 
   uint32_t delay_req_{0};
   uint32_t delay_start_{0};
-  paj7620_gesture_t prev_gesture{NONE};
+  paj7620_gesture_t prev_gesture_{NONE};
 };
 
 }  // namespace paj7620
